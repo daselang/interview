@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- import CSS -->
+    <link rel="stylesheet" href="/element.css">
+    <title>result</title>
+    <style>
+        .center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 1500px;
+            height: 800px;
+            margin: 10px 10px;
+            background: #eee;
+        }
+    </style>
+</head>
+<body>
+<div class="center">
+    <div id="app">
+        <el-table :data="tableData"
+                  height="600"
+                  border
+                  style="width: 100%">
+            <el-table-column
+                    v-for="(column,index) in columnHeaders"
+                    :prop="column"
+                    :label="column"
+                    :key="column"
+                    :formatter="contentFormat"
+                    align="center"
+                    width="110"
+            >
+            </el-table-column>
+        </el-table>
+    </div>
+</div>
+</body>
+<!-- import Vue before Element -->
+<script src="/vue.js"></script>
+<!-- import JavaScript -->
+<script src="/element.js"></script>
+<script src="/element-en.js"></script>
+<script>
+    ELEMENT.locale(ELEMENT.lang.en)
+</script>
+<script>
+    new Vue({
+        el: '#app',
+        data: function () {
+            return {
+                columnHeaders: [],
+                tableData: []
+            }
+        },
+        methods: {
+            getResultData() {
+                let vueInstance = this;
+                fetch('/result/showPageData?uploadId=[[${uploadId}]]', {
+                        method: 'GET'
+                    }
+                ).then(function (response) {
+                    if (response.ok) {
+                        response.json().then(data => {
+                            vueInstance.tableData = data['tableData'];
+                            vueInstance.columnHeaders = data['columnHeaders'];
+                        });
+                    }
+                })
+            },
+            contentFormat(row, column, cellValue, index) {
+                if (cellValue === 0) {
+                    return '';
+                }
+                return cellValue;
+            }
+        },
+        mounted: function () {
+            this.getResultData();
+        }
+    })
+
+
+</script>
+
+</html>

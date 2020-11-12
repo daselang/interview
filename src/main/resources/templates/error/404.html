@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="none,noindex,nofollow"/>
+    <meta name="googlebot" content="noindex"/>
+    <meta name="Baiduspider" content="noarchive"/>
+    <title>404 Not Found</title>
+</head>
+<body>
+<script src="//qzonestyle.gtimg.cn/qzone/hybrid/app/404/search_children.js" charset="utf-8"
+        th:homePageUrl="${#request.getScheme() +'://'+#request.getServerName() +':'
+        +#request.getServerPort()+#request.getContextPath()+'/'} " homePageName="Back To Home"></script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+DELETE FROM supply WHERE 1 = 2;
